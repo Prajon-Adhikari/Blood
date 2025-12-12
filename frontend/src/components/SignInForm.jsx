@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
@@ -7,6 +8,7 @@ const API_BASE_URL =
 export default function SignInForm() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -40,59 +42,117 @@ export default function SignInForm() {
   };
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-      <h2 className="mb-2 text-xl font-semibold text-slate-900">Sign In</h2>
-      <p className="mb-4 text-sm text-slate-600">Access your account.</p>
-      <form className="space-y-3" onSubmit={handleSubmit}>
-        <div className="space-y-1">
-          <label
-            className="block text-sm font-medium text-slate-700"
-            htmlFor="login-email"
-          >
-            Email
-          </label>
-          <input
-            id="login-email"
-            name="email"
-            type="email"
-            value={form.email}
-            onChange={handleChange}
-            className="w-full rounded-lg border border-slate-200 px-3 py-2 outline-none ring-indigo-500 focus:ring-2"
-            placeholder="you@example.com"
-            autoComplete="email"
-            required
-          />
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 px-4 py-10 text-slate-50">
+      <div className="mx-auto flex max-w-6xl flex-col gap-8 lg:flex-row lg:items-center">
+        <div className="flex-1 space-y-4">
+          <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-indigo-200 ring-1 ring-white/15">
+            Sign in
+          </p>
+          <h1 className="text-3xl font-bold sm:text-4xl">
+            Welcome back to the Blood Donation Portal
+          </h1>
+          <p className="text-sm text-slate-200/80 sm:text-base">
+            Access your account and manage donors. Make sure your API base URL is set in{" "}
+            <code className="rounded bg-white/10 px-1">frontend/.env</code> so this form can reach
+            the backend.
+          </p>
+          <div className="flex flex-wrap gap-3 text-sm text-slate-200/70">
+            <span className="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/10">
+              Secure login
+            </span>
+            <span className="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/10">
+              JWT session
+            </span>
+            <span className="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/10">
+              Responsive layout
+            </span>
+          </div>
         </div>
 
-        <div className="space-y-1">
-          <label
-            className="block text-sm font-medium text-slate-700"
-            htmlFor="login-password"
-          >
-            Password
-          </label>
-          <input
-            id="login-password"
-            name="password"
-            type="password"
-            value={form.password}
-            onChange={handleChange}
-            className="w-full rounded-lg border border-slate-200 px-3 py-2 outline-none ring-indigo-500 focus:ring-2"
-            placeholder="Your password"
-            autoComplete="current-password"
-            required
-            minLength={6}
-          />
-        </div>
+        <div className="flex-1">
+          <div className="rounded-2xl bg-white/10 p-1 ring-1 ring-white/10 backdrop-blur">
+            <div className="rounded-xl bg-white p-8 text-slate-900 shadow-2xl">
+              <div className="mb-6 flex items-center justify-between gap-2">
+                <div>
+                  <h2 className="text-2xl font-semibold text-slate-900">Sign in</h2>
+                  <p className="text-sm text-slate-600">Access your account.</p>
+                </div>
+                <span className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700 ring-1 ring-indigo-100">
+                  Auth
+                </span>
+              </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-indigo-300"
-        >
-          {loading ? "Please wait..." : "Sign In"}
-        </button>
-      </form>
+              <form className="space-y-4" onSubmit={handleSubmit}>
+                <div className="space-y-1">
+                  <label
+                    className="block text-sm font-medium text-slate-700"
+                    htmlFor="login-email"
+                  >
+                    Email
+                  </label>
+                  <input
+                    id="login-email"
+                    name="email"
+                    type="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-slate-900 outline-none ring-indigo-500 focus:ring-2"
+                    placeholder="you@example.com"
+                    autoComplete="email"
+                    required
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label
+                    className="block text-sm font-medium text-slate-700"
+                    htmlFor="login-password"
+                  >
+                    Password
+                  </label>
+                  <div className="relative">
+                    <input
+                      id="login-password"
+                      name="password"
+                      type={showPassword ? "text" : "password"}
+                      value={form.password}
+                      onChange={handleChange}
+                      className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 pr-10 text-slate-900 outline-none ring-indigo-500 focus:ring-2"
+                      placeholder="Your password"
+                      autoComplete="current-password"
+                      required
+                      minLength={6}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      className="absolute inset-y-0 right-2 flex items-center text-slate-500 hover:text-slate-700"
+                      aria-label={showPassword ? "Hide password" : "Show password"}
+                    >
+                      {showPassword ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
+                    </button>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-indigo-300"
+                >
+                  {loading ? "Please wait..." : "Sign In"}
+                </button>
+
+                <p className="text-center text-sm text-slate-600">
+                  No account?{" "}
+                  <Link to="/api/auth/signup" className="font-semibold text-indigo-600 hover:text-indigo-700">
+                    Create one
+                  </Link>
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
