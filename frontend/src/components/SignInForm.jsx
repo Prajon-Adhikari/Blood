@@ -42,39 +42,16 @@ export default function SignInForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 px-4 py-10 text-slate-50">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 lg:flex-row lg:items-center">
-        <div className="flex-1 space-y-4">
-          <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-indigo-200 ring-1 ring-white/15">
-            Sign in
-          </p>
-          <h1 className="text-3xl font-bold sm:text-4xl">
-            Welcome back to the Blood Donation Portal
-          </h1>
-          <p className="text-sm text-slate-200/80 sm:text-base">
-            Access your account and manage donors. Make sure your API base URL is set in{" "}
-            <code className="rounded bg-white/10 px-1">frontend/.env</code> so this form can reach
-            the backend.
-          </p>
-          <div className="flex flex-wrap gap-3 text-sm text-slate-200/70">
-            <span className="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/10">
-              Secure login
-            </span>
-            <span className="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/10">
-              JWT session
-            </span>
-            <span className="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/10">
-              Responsive layout
-            </span>
-          </div>
-        </div>
-
+    <div className=" px-4 ">
+      <div className="mx-auto h-screen flex max-w-xl flex-col gap-8 lg:flex-row lg:items-center">
         <div className="flex-1">
           <div className="rounded-2xl bg-white/10 p-1 ring-1 ring-white/10 backdrop-blur">
             <div className="rounded-xl bg-white p-8 text-slate-900 shadow-2xl">
               <div className="mb-6 flex items-center justify-between gap-2">
                 <div>
-                  <h2 className="text-2xl font-semibold text-slate-900">Sign in</h2>
+                  <h2 className="text-2xl font-semibold text-slate-900">
+                    Sign in
+                  </h2>
                   <p className="text-sm text-slate-600">Access your account.</p>
                 </div>
                 <span className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700 ring-1 ring-indigo-100">
@@ -127,9 +104,15 @@ export default function SignInForm() {
                       type="button"
                       onClick={() => setShowPassword((prev) => !prev)}
                       className="absolute inset-y-0 right-2 flex items-center text-slate-500 hover:text-slate-700"
-                      aria-label={showPassword ? "Hide password" : "Show password"}
+                      aria-label={
+                        showPassword ? "Hide password" : "Show password"
+                      }
                     >
-                      {showPassword ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
+                      {showPassword ? (
+                        <AiOutlineEyeInvisible size={20} />
+                      ) : (
+                        <AiOutlineEye size={20} />
+                      )}
                     </button>
                   </div>
                 </div>
@@ -144,7 +127,10 @@ export default function SignInForm() {
 
                 <p className="text-center text-sm text-slate-600">
                   No account?{" "}
-                  <Link to="/api/auth/signup" className="font-semibold text-indigo-600 hover:text-indigo-700">
+                  <Link
+                    to="/api/auth/signup"
+                    className="font-semibold text-indigo-600 hover:text-indigo-700"
+                  >
                     Create one
                   </Link>
                 </p>
