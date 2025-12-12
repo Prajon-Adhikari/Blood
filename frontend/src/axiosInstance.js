@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Create an axios instance
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000/api", // Replace with your backend URL
+  baseURL: "https://blood-ofxk.onrender.com/api", // Replace with your backend URL
   headers: {
     "Content-Type": "application/json",
   },

@@ -16,7 +16,10 @@ app.use(express.json());
 // CORS to allow frontend to call the API
 app.use(
   cors({
-    origin: FRONTEND_ORIGIN === "" ? "*" : FRONTEND_ORIGIN,
+    origin: [
+      "http://localhost:5173",
+      "https://blood-rc6a0kkcs-prajon-adhikaris-projects.vercel.app",
+    ],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
